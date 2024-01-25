@@ -1,0 +1,107 @@
+<?xml version="1.0" ?>
+
+<robot name="lite6_reverse_parallel_gripper">
+
+  <material name="Black">
+    <color rgba="0.0 0.0 0.0 1.0"/>
+  </material>
+  <material name="White">
+    <color rgba="1.0 1.0 1.0 1.0"/>
+  </material>
+
+  <link name="lite6_reverse_parallel_gripper_link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.030"/>
+      <mass value="0.28"/>
+      <inertia ixx="0.00047106" ixy="3.9292E-07" ixz="2.6537E-06" iyy="0.00033072" iyz="-1.0975E-05" izz="0.00025642"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://lite6_description/meshes/gripper/visual/parallel_gripper_base.obj"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="White"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://lite6_description/meshes/gripper/collision/parallel_gripper/parallel_gripper_cylinder1.obj"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+    <collision>
+      <geometry>
+        <mesh filename="package://lite6_description/meshes/gripper/collision/parallel_gripper/parallel_gripper_ellipse1.obj"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+
+  <!--
+    Designing the parallel prismatic joint actuated grippers as boxes.
+    Each box is 2.5 cm tall, 2 cm wide and 0.5 cm thick.
+    For the reverse configuration, when closed, the distance (gripper outer edge to edge) is 2.2 cm.
+    When open, the distance is 3.8 cm (1.6 cm delta as confirmed by the robot specs)
+    Note that we also have to account for the thickness of the parallel blocks when setting up the joint origins.
+    Do the math.
+  -->
+
+  <link name="left_parallel_gripper">
+    <visual>
+      <geometry>
+        <box size="0.02 0.005 0.025"/>
+      </geometry>
+      <collision>
+        <box size="0.02 0.005 0.025"/>
+      </collision>
+      <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+      <inertial>
+        <mass value = "0.005"/>
+      </inertial>
+      <material name="Black"/>
+    </visual>
+  </link>
+
+  <link name="right_parallel_gripper">
+    <visual>
+      <geometry>
+        <box size="0.02 0.005 0.025"/>
+      </geometry>
+      <collision>
+        <box size="0.02 0.005 0.025"/>
+      </collision>
+      <inertial>
+        <mass value = "0.005"/>
+      </inertial>
+      <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+      <material name="Black"/>
+    </visual>
+  </link>
+
+  <joint name="left_parallel_gripper_joint" type="prismatic">
+    <parent link="lite6_reverse_parallel_gripper_link"/>
+    <child link="left_parallel_gripper"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="100.0" lower="0" upper="0.008" velocity="0.01"/>
+    <origin rpy="0 0 0" xyz="0 0.0135 0.0586"/>
+  </joint>
+
+  <joint name="right_parallel_gripper_joint" type="prismatic">
+    <parent link="lite6_reverse_parallel_gripper_link"/>
+    <child link="right_parallel_gripper"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="100.0" lower="-0.008" upper="0." velocity="0.01"/>
+    <!-- Could use a mimic joint here optionally
+    <mimic joint="left_paralle_gripper_joint" multiplier="-1." offset="0"/>
+    -->
+    <origin rpy="0 0 0" xyz="0 -0.0135 0.0586"/>
+  </joint>
+
+  <link name="link_tcp"/>
+
+  <joint name="joint_tcp" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.0836"/>
+    <parent link="lite6_reverse_parallel_gripper_link"/>
+    <child link="link_tcp"/>
+  </joint>
+
+</robot>
