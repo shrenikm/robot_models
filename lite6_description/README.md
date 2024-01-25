@@ -22,3 +22,19 @@ The models under `drake_urdf/` are the versions of the model that I modified for
 * I've also left in the FreeCAD files used to generate the collision meshes
 
 ## Visuals
+
+### Model without a gripper
+
+![lite6_1](https://github.com/shrenikm/robot_models/assets/11331850/50338225-e20e-4287-9cbe-dde16f7799b3)
+
+### Model with both kinds of grippers
+
+![lite6_2](https://github.com/shrenikm/robot_models/assets/11331850/432ec05c-9eb6-484f-bd22-f184455ed823)
+![lite6_3](https://github.com/shrenikm/robot_models/assets/11331850/0ba226d8-899b-484e-8002-7cc5db81e0a6)
+
+### Collision geometry
+
+![lite6_4](https://github.com/shrenikm/robot_models/assets/11331850/77bad031-50a1-483a-a5a1-b7b4f8d535fb)
+
+
+
