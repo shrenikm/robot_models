@@ -96,12 +96,12 @@
     <origin rpy="0 0 0" xyz="0 -0.0135 0.0586"/>
   </joint>
 
-  <link name="link_tcp"/>
+  <link name="link_eef_tip"/>
 
-  <joint name="joint_tcp" type="fixed">
+  <joint name="joint_eef_tip" type="fixed">
     <origin rpy="0 0 0" xyz="0 0 0.0836"/>
     <parent link="lite6_reverse_parallel_gripper_link"/>
-    <child link="link_tcp"/>
+    <child link="link_eef_tip"/>
   </joint>
 
 </robot>

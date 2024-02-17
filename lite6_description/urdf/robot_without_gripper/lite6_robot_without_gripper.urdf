@@ -276,6 +276,46 @@
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
 
+  <gazebo reference="link_base">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <gazebo reference="link1">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <gazebo reference="link2">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <gazebo reference="link3">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <gazebo reference="link4">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <gazebo reference="link5">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <gazebo reference="link6">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+
+  <link name="link_eef"/>
+
+  <joint name="joint_eef" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="link6"/>
+    <child link="link_eef"/>
+  </joint>
+
+  <gazebo>
+    <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
+      <robotNamespace>/xarm</robotNamespace>
+      <!-- <controlPeriod>0.0001</controlPeriod> -->
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+      <legacyModeNS>true</legacyModeNS>
+      <!-- <preserveWorldVelocity>true</preserveWorldVelocity> -->
+    </plugin>
+  </gazebo>
+
   <transmission name="tran1">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="joint1">
@@ -336,45 +376,5 @@
       <mechanicalReduction>100</mechanicalReduction>
     </actuator>
   </transmission>
-
-  <gazebo reference="link_base">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="link1">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="link2">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="link3">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="link4">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="link5">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="link6">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-
-  <link name="link_eef"/>
-
-  <joint name="joint_eef" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-    <parent link="link6"/>
-    <child link="link_eef"/>
-  </joint>
-
-  <gazebo>
-    <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
-      <robotNamespace>/xarm</robotNamespace>
-      <!-- <controlPeriod>0.0001</controlPeriod> -->
-      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
-      <legacyModeNS>true</legacyModeNS>
-      <!-- <preserveWorldVelocity>true</preserveWorldVelocity> -->
-    </plugin>
-  </gazebo>
 
 </robot>

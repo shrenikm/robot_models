@@ -313,6 +313,14 @@
     <dynamics damping="1.0"/>
   </joint>
 
+  <link name="link_eef"/>
+
+  <joint name="joint_eef" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="link6"/>
+    <child link="link_eef"/>
+  </joint>
+
   <transmission name="tran1">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="joint1">
@@ -384,13 +392,5 @@
       <drake:gear_ratio value="100.0" />
     </actuator>
   </transmission>
-
-  <link name="link_eef"/>
-
-  <joint name="joint_eef" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-    <parent link="link6"/>
-    <child link="link_eef"/>
-  </joint>
 
 </robot>

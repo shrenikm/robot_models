@@ -276,6 +276,86 @@
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
 
+  <gazebo reference="link_base">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <gazebo reference="link1">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <gazebo reference="link2">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <gazebo reference="link3">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <gazebo reference="link4">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <gazebo reference="link5">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <gazebo reference="link6">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+
+  <link name="lite6_vacuum_gripper_link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.030"/>
+      <mass value="0.14"/>
+      <inertia ixx="0.00047106" ixy="3.9292E-07" ixz="2.6537E-06" iyy="0.00033072" iyz="-1.0975E-05" izz="0.00025642"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://lite6_description/meshes/gripper/visual/vacuum_gripper.obj"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="White"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://lite6_description/meshes/gripper/collision/vacuum_gripper/vacuum_gripper_cylinder1.obj"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+    <collision>
+      <geometry>
+        <mesh filename="package://lite6_description/meshes/gripper/collision/vacuum_gripper/vacuum_gripper_cylinder2.obj"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+    <collision>
+      <geometry>
+        <mesh filename="package://lite6_description/meshes/gripper/collision/vacuum_gripper/vacuum_gripper_ellipse1.obj"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+
+  <joint name="joint_gripper_connector" type="fixed">
+    <parent link="link6"/>
+    <child link="lite6_vacuum_gripper_link"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+
+  <link name="link_eef_tip"/>
+
+  <joint name="joint_eef_tip" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.061"/>
+    <parent link="lite6_vacuum_gripper_link"/>
+    <child link="link_eef_tip"/>
+  </joint>
+
+  <gazebo>
+    <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
+      <robotNamespace>/xarm</robotNamespace>
+      <!-- <controlPeriod>0.0001</controlPeriod> -->
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+      <legacyModeNS>true</legacyModeNS>
+      <!-- <preserveWorldVelocity>true</preserveWorldVelocity> -->
+    </plugin>
+  </gazebo>
+
+  <!-- Actuators -->
   <transmission name="tran1">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="joint1">
@@ -336,93 +416,5 @@
       <mechanicalReduction>100</mechanicalReduction>
     </actuator>
   </transmission>
-
-  <gazebo reference="link_base">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="link1">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="link2">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="link3">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="link4">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="link5">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="link6">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-
-  <link name="link_eef"/>
-
-  <joint name="joint_eef" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-    <parent link="link6"/>
-    <child link="link_eef"/>
-  </joint>
-
-  <joint name="gripper_fix" type="fixed">
-    <parent link="link_eef"/>
-    <child link="lite6_vacuum_gripper_link"/>
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-  </joint>
-
-  <link name="lite6_vacuum_gripper_link">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 0.0 0.030"/>
-      <mass value="0.14"/>
-      <inertia ixx="0.00047106" ixy="3.9292E-07" ixz="2.6537E-06" iyy="0.00033072" iyz="-1.0975E-05" izz="0.00025642"/>
-    </inertial>
-    <visual>
-      <geometry>
-        <mesh filename="package://lite6_description/meshes/gripper/visual/vacuum_gripper.obj"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <material name="White"/>
-    </visual>
-    <collision>
-      <geometry>
-        <mesh filename="package://lite6_description/meshes/gripper/collision/vacuum_gripper/vacuum_gripper_cylinder1.obj"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-    </collision>
-    <collision>
-      <geometry>
-        <mesh filename="package://lite6_description/meshes/gripper/collision/vacuum_gripper/vacuum_gripper_cylinder2.obj"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-    </collision>
-    <collision>
-      <geometry>
-        <mesh filename="package://lite6_description/meshes/gripper/collision/vacuum_gripper/vacuum_gripper_ellipse1.obj"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-    </collision>
-  </link>
-
-
-  <link name="link_tcp"/>
-
-  <joint name="joint_tcp" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0.061"/>
-    <parent link="lite6_vacuum_gripper_link"/>
-    <child link="link_tcp"/>
-  </joint>
-
-  <gazebo>
-    <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
-      <robotNamespace>/xarm</robotNamespace>
-      <!-- <controlPeriod>0.0001</controlPeriod> -->
-      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
-      <legacyModeNS>true</legacyModeNS>
-      <!-- <preserveWorldVelocity>true</preserveWorldVelocity> -->
-    </plugin>
-  </gazebo>
 
 </robot>
