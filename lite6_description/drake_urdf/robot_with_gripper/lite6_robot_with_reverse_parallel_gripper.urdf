@@ -313,6 +313,112 @@
     <dynamics damping="1.0"/>
   </joint>
 
+  <link name="lite6_reverse_parallel_gripper_link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.030"/>
+      <mass value="0.28"/>
+      <inertia ixx="0.00047106" ixy="3.9292E-07" ixz="2.6537E-06" iyy="0.00033072" iyz="-1.0975E-05" izz="0.00025642"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://lite6_description/meshes/gripper/visual/parallel_gripper_base.obj"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="White"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://lite6_description/meshes/gripper/collision/parallel_gripper/parallel_gripper_cylinder1.obj">
+          <drake:declare_convex/>
+        </mesh>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+    <collision>
+      <geometry>
+        <mesh filename="package://lite6_description/meshes/gripper/collision/parallel_gripper/parallel_gripper_ellipse1.obj">
+          <drake:declare_convex/>
+        </mesh>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
+
+  <joint name="joint_gripper_connector" type="fixed">
+    <parent link="link6"/>
+    <child link="lite6_reverse_parallel_gripper_link"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+
+  <!--
+    Designing the parallel prismatic joint actuated grippers as boxes.
+    Each box is 2.5 cm tall, 2 cm wide and 0.5 cm thick.
+    For the reverse configuration, when closed, the distance (gripper outer edge to edge) is 2.2 cm.
+    When open, the distance is 3.8 cm (1.6 cm delta as confirmed by the robot specs)
+    Note that we also have to account for the thickness of the parallel blocks when setting up the joint origins.
+    Do the math.
+  -->
+
+  <link name="left_parallel_gripper">
+    <visual>
+      <geometry>
+        <box size="0.02 0.005 0.025"/>
+      </geometry>
+      <collision>
+        <box size="0.02 0.005 0.025"/>
+      </collision>
+      <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+      <inertial>
+        <mass value = "0.005"/>
+      </inertial>
+      <material name="Black"/>
+    </visual>
+  </link>
+
+  <link name="right_parallel_gripper">
+    <visual>
+      <geometry>
+        <box size="0.02 0.005 0.025"/>
+      </geometry>
+      <collision>
+        <box size="0.02 0.005 0.025"/>
+      </collision>
+      <inertial>
+        <mass value = "0.005"/>
+      </inertial>
+      <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+      <material name="Black"/>
+    </visual>
+  </link>
+
+  <joint name="joint_left_parallel_gripper" type="prismatic">
+    <parent link="lite6_reverse_parallel_gripper_link"/>
+    <child link="left_parallel_gripper"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="100.0" lower="0" upper="0.008" velocity="0.01"/>
+    <origin rpy="0 0 0" xyz="0 0.0135 0.0586"/>
+  </joint>
+
+  <joint name="joint_right_parallel_gripper" type="prismatic">
+    <parent link="lite6_reverse_parallel_gripper_link"/>
+    <child link="right_parallel_gripper"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="100.0" lower="-0.008" upper="0." velocity="0.01"/>
+    <!-- Could use a mimic joint here optionally, but Drake has certain limitations here.
+    <mimic joint="left_paralle_gripper_joint" multiplier="-1." offset="0"/>
+    -->
+    <origin rpy="0 0 0" xyz="0 -0.0135 0.0586"/>
+  </joint>
+
+  <link name="link_eef_tip"/>
+
+  <joint name="joint_eef_tip" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.0836"/>
+    <parent link="lite6_reverse_parallel_gripper_link"/>
+    <child link="link_eef_tip"/>
+  </joint>
+
+  <!-- Actuators -->
   <transmission name="tran1">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="joint1">
@@ -385,117 +491,26 @@
     </actuator>
   </transmission>
 
-  <link name="link_eef"/>
+  <transmission name="tran7">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_left_parallel_gripper">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor7">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
 
-  <joint name="joint_eef" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-    <parent link="link6"/>
-    <child link="link_eef"/>
-  </joint>
-
-  <joint name="gripper_fix" type="fixed">
-    <parent link="link_eef"/>
-    <child link="lite6_reverse_parallel_gripper_link"/>
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-  </joint>
-
-  <link name="lite6_reverse_parallel_gripper_link">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 0.0 0.030"/>
-      <mass value="0.28"/>
-      <inertia ixx="0.00047106" ixy="3.9292E-07" ixz="2.6537E-06" iyy="0.00033072" iyz="-1.0975E-05" izz="0.00025642"/>
-    </inertial>
-    <visual>
-      <geometry>
-        <mesh filename="package://lite6_description/meshes/gripper/visual/parallel_gripper_base.obj"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <material name="White"/>
-    </visual>
-    <collision>
-      <geometry>
-        <mesh filename="package://lite6_description/meshes/gripper/collision/parallel_gripper/parallel_gripper_cylinder1.obj">
-          <drake:declare_convex/>
-        </mesh>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-    </collision>
-    <collision>
-      <geometry>
-        <mesh filename="package://lite6_description/meshes/gripper/collision/parallel_gripper/parallel_gripper_ellipse1.obj">
-          <drake:declare_convex/>
-        </mesh>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-    </collision>
-  </link>
-
-  <!--
-    Designing the parallel prismatic joint actuated grippers as boxes.
-    Each box is 2.5 cm tall, 2 cm wide and 0.5 cm thick.
-    For the reverse configuration, when closed, the distance (gripper outer edge to edge) is 2.2 cm.
-    When open, the distance is 3.8 cm (1.6 cm delta as confirmed by the robot specs)
-    Note that we also have to account for the thickness of the parallel blocks when setting up the joint origins.
-    Do the math.
-  -->
-
-  <link name="left_parallel_gripper">
-    <visual>
-      <geometry>
-        <box size="0.02 0.005 0.025"/>
-      </geometry>
-      <collision>
-        <box size="0.02 0.005 0.025"/>
-      </collision>
-      <origin rpy="0 0 0" xyz="0 0 0.0125"/>
-      <inertial>
-        <mass value = "0.005"/>
-      </inertial>
-      <material name="Black"/>
-    </visual>
-  </link>
-
-  <link name="right_parallel_gripper">
-    <visual>
-      <geometry>
-        <box size="0.02 0.005 0.025"/>
-      </geometry>
-      <collision>
-        <box size="0.02 0.005 0.025"/>
-      </collision>
-      <inertial>
-        <mass value = "0.005"/>
-      </inertial>
-      <origin rpy="0 0 0" xyz="0 0 0.0125"/>
-      <material name="Black"/>
-    </visual>
-  </link>
-
-  <joint name="left_parallel_gripper_joint" type="prismatic">
-    <parent link="lite6_reverse_parallel_gripper_link"/>
-    <child link="left_parallel_gripper"/>
-    <axis xyz="0 1 0"/>
-    <limit effort="100.0" lower="0" upper="0.008" velocity="0.01"/>
-    <origin rpy="0 0 0" xyz="0 0.0135 0.0586"/>
-  </joint>
-
-  <joint name="right_parallel_gripper_joint" type="prismatic">
-    <parent link="lite6_reverse_parallel_gripper_link"/>
-    <child link="right_parallel_gripper"/>
-    <axis xyz="0 1 0"/>
-    <limit effort="100.0" lower="-0.008" upper="0." velocity="0.01"/>
-    <!-- Could use a mimic joint here optionally, but Drake has certain limitations here.
-    <mimic joint="left_paralle_gripper_joint" multiplier="-1." offset="0"/>
-    -->
-    <origin rpy="0 0 0" xyz="0 -0.0135 0.0586"/>
-  </joint>
-
-  <link name="link_tcp"/>
-
-  <joint name="joint_tcp" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0.0836"/>
-    <parent link="lite6_reverse_parallel_gripper_link"/>
-    <child link="link_tcp"/>
-  </joint>
+  <transmission name="tran8">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_right_parallel_gripper">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor8">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
 
 </robot>
