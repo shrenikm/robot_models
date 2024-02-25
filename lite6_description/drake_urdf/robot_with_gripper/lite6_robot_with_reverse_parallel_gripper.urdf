@@ -360,32 +360,42 @@
   -->
 
   <link name="left_parallel_gripper">
+    <inertial>
+      <mass value = "0.005"/>
+      <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+      <inertia ixx="0.00000027" ixy="0" ixz="0" iyy="0.000000427" iyz="0" izz="0.000000177"/>
+    </inertial>
+    <collision>
+      <geometry>
+        <box size="0.02 0.005 0.025"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    </collision>
     <visual>
       <geometry>
         <box size="0.02 0.005 0.025"/>
       </geometry>
-      <collision>
-        <box size="0.02 0.005 0.025"/>
-      </collision>
       <origin rpy="0 0 0" xyz="0 0 0.0125"/>
-      <inertial>
-        <mass value = "0.005"/>
-      </inertial>
       <material name="Black"/>
     </visual>
   </link>
 
   <link name="right_parallel_gripper">
+    <inertial>
+      <mass value = "0.005"/>
+      <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+      <inertia ixx="0.00000027" ixy="0" ixz="0" iyy="0.000000427" iyz="0" izz="0.000000177"/>
+    </inertial>
+    <collision>
+      <geometry>
+        <box size="0.02 0.005 0.025"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    </collision>
     <visual>
       <geometry>
         <box size="0.02 0.005 0.025"/>
       </geometry>
-      <collision>
-        <box size="0.02 0.005 0.025"/>
-      </collision>
-      <inertial>
-        <mass value = "0.005"/>
-      </inertial>
       <origin rpy="0 0 0" xyz="0 0 0.0125"/>
       <material name="Black"/>
     </visual>
