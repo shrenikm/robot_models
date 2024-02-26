@@ -33,7 +33,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/links/collision/link_base/link_base_box1.obj">
+        <mesh filename="package://lite6_description/meshes/links/collision/link_base/link_base_cylinder1.obj">
           <drake:declare_convex/>
         </mesh>
       </geometry>
@@ -41,7 +41,7 @@
     </collision>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/links/collision/link_base/link_base_cylinder1.obj">
+        <mesh filename="package://lite6_description/meshes/links/collision/link_base/link_base_cylinder2.obj">
           <drake:declare_convex/>
         </mesh>
       </geometry>
