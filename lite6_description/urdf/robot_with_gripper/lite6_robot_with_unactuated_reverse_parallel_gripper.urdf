@@ -7,7 +7,7 @@ for a total of 12 states. This model can be used for any computation
 that does not need the gripper DOF (Jacobian computation, etc.).
 -->
 
-<robot name="lite6_robot_with_reverse_parallel_gripper">
+<robot name="lite6_robot_with_unactuated_reverse_parallel_gripper">
 
   <material name="Black">
     <color rgba="0.0 0.0 0.0 1.0"/>
