@@ -1,6 +1,13 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 
-<robot name="lite6_robot_with_normal_parallel_gripper">
+<!--
+Model of the reverse parallel gripper, without any gripper actuation.
+The model will thus have 6 positions (6 joint DOF) and velocities
+for a total of 12 states. This model can be used for any Drake system computation
+that does not need the gripper DOF (Jacobian computation, etc.).
+-->
+
+<robot xmlns:drake="http://drake.mit.edu" name="lite6_robot_with_reverse_parallel_gripper">
 
   <material name="Black">
     <color rgba="0.0 0.0 0.0 1.0"/>
@@ -13,6 +20,9 @@
   </material>
   <material name="Silver">
     <color rgba="0.753 0.753 0.753 1.0"/>
+  </material>
+  <material name="DarkSilver">
+    <color rgba="0.653 0.653 0.653 1.0"/>
   </material>
 
   <link name="link_base">
@@ -30,18 +40,22 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/links/collision/link_base/link_base_cylinder1.obj"/>
+        <mesh filename="package://lite6_description/meshes/links/collision/link_base/link_base_cylinder1.obj">
+          <drake:declare_convex/>
+        </mesh>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/links/collision/link_base/link_base_cylinder2.obj"/>
+        <mesh filename="package://lite6_description/meshes/links/collision/link_base/link_base_cylinder2.obj">
+          <drake:declare_convex/>
+        </mesh>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
-  </link>
 
+  </link>
   <link name="link1">
     <inertial>
       <origin rpy="0 0 0" xyz="-0.00036 0.04195 -0.0025"/>
@@ -53,17 +67,21 @@
         <mesh filename="package://lite6_description/meshes/links/visual/link1.obj"/>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <material name="White"/>
+      <material name="DarkSilver"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/links/collision/link1/link1_cylinder1.obj"/>
+        <mesh filename="package://lite6_description/meshes/links/collision/link1/link1_cylinder1.obj">
+          <drake:declare_convex/>
+        </mesh>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/links/collision/link1/link1_cylinder2.obj"/>
+        <mesh filename="package://lite6_description/meshes/links/collision/link1/link1_cylinder2.obj">
+          <drake:declare_convex/>
+        </mesh>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
@@ -75,7 +93,7 @@
     <child link="link1"/>
     <axis xyz="0 0 1"/>
     <limit effort="50.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="3.14"/>
-    <dynamics damping="1.0" friction="1.0"/>
+    <dynamics damping="1.0"/>
   </joint>
 
   <link name="link2">
@@ -93,19 +111,25 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/links/collision/link2/link2_cylinder1.obj"/>
+        <mesh filename="package://lite6_description/meshes/links/collision/link2/link2_cylinder1.obj">
+          <drake:declare_convex/>
+        </mesh>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/links/collision/link2/link2_cylinder2.obj"/>
+        <mesh filename="package://lite6_description/meshes/links/collision/link2/link2_cylinder2.obj">
+          <drake:declare_convex/>
+        </mesh>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/links/collision/link2/link2_box1.obj"/>
+        <mesh filename="package://lite6_description/meshes/links/collision/link2/link2_box1.obj">
+          <drake:declare_convex/>
+        </mesh>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
@@ -117,7 +141,7 @@
     <child link="link2"/>
     <axis xyz="0 0 1"/>
     <limit effort="50.0" lower="-2.61799" upper="2.61799" velocity="3.14"/>
-    <dynamics damping="1.0" friction="1.0"/>
+    <dynamics damping="1.0"/>
   </joint>
 
   <link name="link3">
@@ -131,23 +155,29 @@
         <mesh filename="package://lite6_description/meshes/links/visual/link3.obj"/>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <material name="White"/>
+      <material name="DarkSilver"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/links/collision/link3/link3_cylinder1.obj"/>
+        <mesh filename="package://lite6_description/meshes/links/collision/link3/link3_cylinder1.obj">
+          <drake:declare_convex/>
+        </mesh>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/links/collision/link3/link3_cylinder2.obj"/>
+        <mesh filename="package://lite6_description/meshes/links/collision/link3/link3_cylinder2.obj">
+          <drake:declare_convex/>
+        </mesh>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/links/collision/link3/link3_box1.obj"/>
+        <mesh filename="package://lite6_description/meshes/links/collision/link3/link3_box1.obj">
+          <drake:declare_convex/>
+        </mesh>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
@@ -159,7 +189,7 @@
     <child link="link3"/>
     <axis xyz="0 0 1"/>
     <limit effort="32.0" lower="-0.061087" upper="5.235988" velocity="3.14"/>
-    <dynamics damping="1.0" friction="1.0"/>
+    <dynamics damping="1.0"/>
   </joint>
 
   <link name="link4">
@@ -177,25 +207,33 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/links/collision/link4/link4_cylinder1.obj"/>
+        <mesh filename="package://lite6_description/meshes/links/collision/link4/link4_cylinder1.obj">
+          <drake:declare_convex/>
+        </mesh>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/links/collision/link4/link4_cylinder2.obj"/>
+        <mesh filename="package://lite6_description/meshes/links/collision/link4/link4_cylinder2.obj">
+          <drake:declare_convex/>
+        </mesh>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/links/collision/link4/link4_cylinder3.obj"/>
+        <mesh filename="package://lite6_description/meshes/links/collision/link4/link4_cylinder3.obj">
+          <drake:declare_convex/>
+        </mesh>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/links/collision/link4/link4_box1.obj"/>
+        <mesh filename="package://lite6_description/meshes/links/collision/link4/link4_box1.obj">
+          <drake:declare_convex/>
+        </mesh>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
@@ -207,7 +245,7 @@
     <child link="link4"/>
     <axis xyz="0 0 1"/>
     <limit effort="32.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="3.14"/>
-    <dynamics damping="1.0" friction="1.0"/>
+    <dynamics damping="1.0"/>
   </joint>
 
   <link name="link5">
@@ -225,13 +263,17 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/links/collision/link5/link5_cylinder1.obj"/>
+        <mesh filename="package://lite6_description/meshes/links/collision/link5/link5_cylinder1.obj">
+          <drake:declare_convex/>
+        </mesh>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/links/collision/link5/link5_cylinder2.obj"/>
+        <mesh filename="package://lite6_description/meshes/links/collision/link5/link5_cylinder2.obj">
+          <drake:declare_convex/>
+        </mesh>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
@@ -243,7 +285,7 @@
     <child link="link5"/>
     <axis xyz="0 0 1"/>
     <limit effort="32.0" lower="-2.1642" upper="2.1642" velocity="3.14"/>
-    <dynamics damping="1.0" friction="1.0"/>
+    <dynamics damping="1.0"/>
   </joint>
 
   <link name="link6">
@@ -257,11 +299,13 @@
         <mesh filename="package://lite6_description/meshes/links/visual/link6.obj"/>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <material name="Silver"/>
+      <material name="DarkSilver"/>
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/links/collision/link6/link6_cylinder1.obj"/>
+        <mesh filename="package://lite6_description/meshes/links/collision/link6/link6_cylinder1.obj">
+          <drake:declare_convex/>
+        </mesh>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
@@ -273,32 +317,10 @@
     <child link="link6"/>
     <axis xyz="0 0 1"/>
     <limit effort="20.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="3.14"/>
-    <dynamics damping="1.0" friction="1.0"/>
+    <dynamics damping="1.0"/>
   </joint>
 
-  <gazebo reference="link_base">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="link1">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="link2">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="link3">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="link4">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="link5">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-  <gazebo reference="link6">
-    <selfCollide>true</selfCollide>
-  </gazebo>
-
-  <link name="lite6_normal_parallel_gripper_link">
+  <link name="lite6_reverse_parallel_gripper_link">
     <inertial>
       <origin rpy="0 0 0" xyz="0.0 0.0 0.030"/>
       <mass value="0.28"/>
@@ -313,13 +335,17 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/gripper/collision/parallel_gripper/parallel_gripper_cylinder1.obj"/>
+        <mesh filename="package://lite6_description/meshes/gripper/collision/parallel_gripper/parallel_gripper_cylinder1.obj">
+          <drake:declare_convex/>
+        </mesh>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
     <collision>
       <geometry>
-        <mesh filename="package://lite6_description/meshes/gripper/collision/parallel_gripper/parallel_gripper_ellipse1.obj"/>
+        <mesh filename="package://lite6_description/meshes/gripper/collision/parallel_gripper/parallel_gripper_ellipse1.obj">
+          <drake:declare_convex/>
+        </mesh>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
@@ -327,20 +353,20 @@
 
   <joint name="joint_gripper_connector" type="fixed">
     <parent link="link6"/>
-    <child link="lite6_normal_parallel_gripper_link"/>
+    <child link="lite6_reverse_parallel_gripper_link"/>
     <origin rpy="0 0 0" xyz="0 0 0"/>
   </joint>
 
   <!--
     Designing the parallel prismatic joint actuated grippers as boxes.
     Each box is 2.5 cm tall, 2 cm wide and 0.5 cm thick.
-    For the normal configuration, when closed, the distance 0 cm (touching).
-    When open, the distance is 1.6 cm (As confirmed by the robot specs)
+    For the reverse configuration, when closed, the distance (gripper outer edge to edge) is 2.2 cm.
+    When open, the distance is 3.8 cm (1.6 cm delta as confirmed by the robot specs)
     Note that we also have to account for the thickness of the parallel blocks when setting up the joint origins.
     Do the math.
   -->
 
-  <link name="left_parallel_gripper">
+  <link name="left_parallel_gripper_link">
     <inertial>
       <mass value = "0.005"/>
       <origin rpy="0 0 0" xyz="0 0 0.0125"/>
@@ -361,7 +387,7 @@
     </visual>
   </link>
 
-  <link name="right_parallel_gripper">
+  <link name="right_parallel_gripper_link">
     <inertial>
       <mass value = "0.005"/>
       <origin rpy="0 0 0" xyz="0 0 0.0125"/>
@@ -381,43 +407,14 @@
       <material name="Black"/>
     </visual>
   </link>
-
-  <joint name="joint_left_parallel_gripper" type="prismatic">
-    <parent link="lite6_normal_parallel_gripper_link"/>
-    <child link="left_parallel_gripper"/>
-    <axis xyz="0 1 0"/>
-    <limit effort="100.0" lower="0" upper="0.008" velocity="0.01"/>
-    <origin rpy="0 0 0" xyz="0 0.0025 0.0586"/>
-  </joint>
-
-  <joint name="joint_right_parallel_gripper" type="prismatic">
-    <parent link="lite6_normal_parallel_gripper_link"/>
-    <child link="right_parallel_gripper"/>
-    <axis xyz="0 1 0"/>
-    <limit effort="100.0" lower="-0.008" upper="0." velocity="0.01"/>
-    <!-- Could use a mimic joint here optionally
-    <mimic joint="left_paralle_gripper_joint" multiplier="-1." offset="0"/>
-    -->
-    <origin rpy="0 0 0" xyz="0 -0.0025 0.0586"/>
-  </joint>
 
   <link name="link_eef_tip"/>
 
   <joint name="joint_eef_tip" type="fixed">
     <origin rpy="0 0 0" xyz="0 0 0.0836"/>
-    <parent link="lite6_normal_parallel_gripper_link"/>
+    <parent link="lite6_reverse_parallel_gripper_link"/>
     <child link="link_eef_tip"/>
   </joint>
- 
-  <gazebo>
-    <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
-      <robotNamespace>/xarm</robotNamespace>
-      <!-- <controlPeriod>0.0001</controlPeriod> -->
-      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
-      <legacyModeNS>true</legacyModeNS>
-      <!-- <preserveWorldVelocity>true</preserveWorldVelocity> -->
-    </plugin>
-  </gazebo>
 
   <!-- Actuators -->
   <transmission name="tran1">
@@ -427,9 +424,11 @@
     </joint>
     <actuator name="motor1">
       <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-      <mechanicalReduction>100</mechanicalReduction>
+      <mechanicalReduction>1</mechanicalReduction>
+      <drake:gear_ratio value="100.0" />
     </actuator>
   </transmission>
+
   <transmission name="tran2">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="joint2">
@@ -437,9 +436,11 @@
     </joint>
     <actuator name="motor2">
       <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-      <mechanicalReduction>100</mechanicalReduction>
+      <mechanicalReduction>1</mechanicalReduction>
+      <drake:gear_ratio value="100.0" />
     </actuator>
   </transmission>
+
   <transmission name="tran3">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="joint3">
@@ -447,9 +448,11 @@
     </joint>
     <actuator name="motor3">
       <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-      <mechanicalReduction>100</mechanicalReduction>
+      <mechanicalReduction>1</mechanicalReduction>
+      <drake:gear_ratio value="100.0" />
     </actuator>
   </transmission>
+
   <transmission name="tran4">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="joint4">
@@ -457,9 +460,11 @@
     </joint>
     <actuator name="motor4">
       <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-      <mechanicalReduction>100</mechanicalReduction>
+      <mechanicalReduction>1</mechanicalReduction>
+      <drake:gear_ratio value="100.0" />
     </actuator>
   </transmission>
+
   <transmission name="tran5">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="joint5">
@@ -467,9 +472,11 @@
     </joint>
     <actuator name="motor5">
       <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-      <mechanicalReduction>100</mechanicalReduction>
+      <mechanicalReduction>1</mechanicalReduction>
+      <drake:gear_ratio value="100.0" />
     </actuator>
   </transmission>
+
   <transmission name="tran6">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="joint6">
@@ -477,25 +484,8 @@
     </joint>
     <actuator name="motor6">
       <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-      <mechanicalReduction>100</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="tran7">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="joint_left_parallel_gripper">
-      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="motor7">
-      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-    </actuator>
-  </transmission>
-  <transmission name="tran8">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="joint_right_parallel_gripper">
-      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="motor8">
-      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+      <drake:gear_ratio value="100.0" />
     </actuator>
   </transmission>
 

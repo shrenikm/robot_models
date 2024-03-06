@@ -1,6 +1,13 @@
 <?xml version="1.0" ?>
 
-<robot name="lite6_robot_without_gripper">
+<!--
+Model of the normal parallel gripper, that has its gripper joints actuated.
+The model will thus have 8 positions (6 joint DOF + 2 gripper positions) and velocities
+for a total of 16 states. This is the model to be used for actual manipulation simulation
+as the gripper can move and manipulate objects.
+-->
+
+<robot name="lite6_robot_with_normal_parallel_gripper">
 
   <material name="Black">
     <color rgba="0.0 0.0 0.0 1.0"/>
@@ -276,14 +283,117 @@
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
 
-  <link name="link_eef"/>
+  <link name="lite6_normal_parallel_gripper_link">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.030"/>
+      <mass value="0.28"/>
+      <inertia ixx="0.00047106" ixy="3.9292E-07" ixz="2.6537E-06" iyy="0.00033072" iyz="-1.0975E-05" izz="0.00025642"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://lite6_description/meshes/gripper/visual/parallel_gripper_base.obj"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="White"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://lite6_description/meshes/gripper/collision/parallel_gripper/parallel_gripper_cylinder1.obj"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+    <collision>
+      <geometry>
+        <mesh filename="package://lite6_description/meshes/gripper/collision/parallel_gripper/parallel_gripper_ellipse1.obj"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+  </link>
 
-  <joint name="joint_eef" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0"/>
+  <joint name="joint_gripper_connector" type="fixed">
     <parent link="link6"/>
-    <child link="link_eef"/>
+    <child link="lite6_normal_parallel_gripper_link"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
   </joint>
 
+  <!--
+    Designing the parallel prismatic joint actuated grippers as boxes.
+    Each box is 2.5 cm tall, 2 cm wide and 0.5 cm thick.
+    For the normal configuration, when closed, the distance 0 cm (touching).
+    When open, the distance is 1.6 cm (As confirmed by the robot specs)
+    Note that we also have to account for the thickness of the parallel blocks when setting up the joint origins.
+    Do the math.
+  -->
+
+  <link name="left_parallel_gripper_link">
+    <inertial>
+      <mass value = "0.005"/>
+      <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+      <inertia ixx="0.00000027" ixy="0" ixz="0" iyy="0.000000427" iyz="0" izz="0.000000177"/>
+    </inertial>
+    <collision>
+      <geometry>
+        <box size="0.02 0.005 0.025"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    </collision>
+    <visual>
+      <geometry>
+        <box size="0.02 0.005 0.025"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+      <material name="Black"/>
+    </visual>
+  </link>
+
+  <link name="right_parallel_gripper_link">
+    <inertial>
+      <mass value = "0.005"/>
+      <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+      <inertia ixx="0.00000027" ixy="0" ixz="0" iyy="0.000000427" iyz="0" izz="0.000000177"/>
+    </inertial>
+    <collision>
+      <geometry>
+        <box size="0.02 0.005 0.025"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    </collision>
+    <visual>
+      <geometry>
+        <box size="0.02 0.005 0.025"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+      <material name="Black"/>
+    </visual>
+  </link>
+
+  <joint name="joint_left_parallel_gripper" type="prismatic">
+    <parent link="lite6_normal_parallel_gripper_link"/>
+    <child link="left_parallel_gripper_link"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="100.0" lower="0" upper="0.008" velocity="0.01"/>
+    <origin rpy="0 0 0" xyz="0 0.0025 0.0586"/>
+  </joint>
+
+  <joint name="joint_right_parallel_gripper" type="prismatic">
+    <parent link="lite6_normal_parallel_gripper_link"/>
+    <child link="right_parallel_gripper_link"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="100.0" lower="-0.008" upper="0." velocity="0.01"/>
+    <!-- Could use a mimic joint here optionally
+    <mimic joint="left_paralle_gripper_joint" multiplier="-1." offset="0"/>
+    -->
+    <origin rpy="0 0 0" xyz="0 -0.0025 0.0586"/>
+  </joint>
+
+  <link name="link_eef_tip"/>
+
+  <joint name="joint_eef_tip" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.0836"/>
+    <parent link="lite6_normal_parallel_gripper_link"/>
+    <child link="link_eef_tip"/>
+  </joint>
+ 
   <!-- Gazebo -->
   <gazebo>
     <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
@@ -316,8 +426,18 @@
   <gazebo reference="link6">
     <selfCollide>true</selfCollide>
   </gazebo>
+  <gazebo reference="lite6_normal_parallel_gripper_link">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <gazebo reference="left_parallel_gripper_link">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <gazebo reference="right_parallel_gripper_link">
+    <selfCollide>true</selfCollide>
+  </gazebo>
 
 
+  <!-- Actuators -->
   <transmission name="tran1">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="joint1">
@@ -376,6 +496,24 @@
     <actuator name="motor6">
       <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
       <mechanicalReduction>100</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="tran7">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_left_parallel_gripper">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor7">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+  <transmission name="tran8">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_right_parallel_gripper">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor8">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
     </actuator>
   </transmission>
 
