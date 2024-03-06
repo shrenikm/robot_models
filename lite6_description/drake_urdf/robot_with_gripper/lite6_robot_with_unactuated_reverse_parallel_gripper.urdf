@@ -408,6 +408,18 @@ that does not need the gripper DOF (Jacobian computation, etc.).
     </visual>
   </link>
 
+  <joint name="joint_left_parallel_gripper" type="fixed">
+    <parent link="lite6_reverse_parallel_gripper_link"/>
+    <child link="left_parallel_gripper_link"/>
+    <origin rpy="0 0 0" xyz="0 0.0135 0.0586"/>
+  </joint>
+
+  <joint name="joint_right_parallel_gripper" type="fixed">
+    <parent link="lite6_reverse_parallel_gripper_link"/>
+    <child link="right_parallel_gripper_link"/>
+    <origin rpy="0 0 0" xyz="0 -0.0135 0.0586"/>
+  </joint>
+
   <link name="link_eef_tip"/>
 
   <joint name="joint_eef_tip" type="fixed">
