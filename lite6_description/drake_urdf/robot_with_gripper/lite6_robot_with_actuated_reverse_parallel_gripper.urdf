@@ -7,7 +7,7 @@ for a total of 16 states. This is the model to be used for actual manipulation s
 as the gripper can move and manipulate objects.
 -->
 
-<robot xmlns:drake="http://drake.mit.edu" name="lite6_robot_with_reverse_parallel_gripper">
+<robot xmlns:drake="http://drake.mit.edu" name="lite6_robot_with_actuated_reverse_parallel_gripper">
 
   <material name="Black">
     <color rgba="0.0 0.0 0.0 1.0"/>

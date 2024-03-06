@@ -7,7 +7,7 @@ for a total of 12 states. This model can be used for any Drake system computatio
 that does not need the gripper DOF (Jacobian computation, etc.).
 -->
 
-<robot xmlns:drake="http://drake.mit.edu" name="lite6_robot_with_normal_parallel_gripper">
+<robot xmlns:drake="http://drake.mit.edu" name="lite6_robot_with_unactuated_normal_parallel_gripper">
 
   <material name="Black">
     <color rgba="0.0 0.0 0.0 1.0"/>
