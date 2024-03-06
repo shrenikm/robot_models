@@ -367,22 +367,15 @@ that does not need the gripper DOF (Jacobian computation, etc.).
     </visual>
   </link>
 
-  <joint name="left_parallel_gripper_joint" type="prismatic">
+  <joint name="left_parallel_gripper_joint" type="fixed">
     <parent link="lite6_reverse_parallel_gripper_link"/>
     <child link="left_parallel_gripper_link"/>
-    <axis xyz="0 1 0"/>
-    <limit effort="100.0" lower="0" upper="0.008" velocity="0.01"/>
     <origin rpy="0 0 0" xyz="0 0.0135 0.0586"/>
   </joint>
 
-  <joint name="right_parallel_gripper_joint" type="prismatic">
+  <joint name="right_parallel_gripper_joint" type="fixed">
     <parent link="lite6_reverse_parallel_gripper_link"/>
     <child link="right_parallel_gripper_link"/>
-    <axis xyz="0 1 0"/>
-    <limit effort="100.0" lower="-0.008" upper="0." velocity="0.01"/>
-    <!-- Could use a mimic joint here optionally
-    <mimic joint="left_paralle_gripper_joint" multiplier="-1." offset="0"/>
-    -->
     <origin rpy="0 0 0" xyz="0 -0.0135 0.0586"/>
   </joint>
 
