@@ -377,6 +377,12 @@ as the gripper can move and manipulate objects.
         <box size="0.02 0.005 0.025"/>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+      <drake:proximity_properties>
+        <drake:compliant_hydroelastic/>
+        <drake:hydroelastic_modulus value="1e6"/>
+        <drake:hunt_crossley_dissipation value="0."/>
+        <drake:mu_dynamic value="1."/>
+      </drake:proximity_properties>
     </collision>
     <visual>
       <geometry>
@@ -398,6 +404,12 @@ as the gripper can move and manipulate objects.
         <box size="0.02 0.005 0.025"/>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+      <drake:proximity_properties>
+        <drake:compliant_hydroelastic/>
+        <drake:hydroelastic_modulus value="1e6"/>
+        <drake:hunt_crossley_dissipation value="0."/>
+        <drake:mu_dynamic value="1."/>
+      </drake:proximity_properties>
     </collision>
     <visual>
       <geometry>
