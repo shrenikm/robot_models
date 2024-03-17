@@ -8,4 +8,5 @@ These are going to be modifications of existing models from manufacturers, so pl
 
 Robot | Link |
 ---   | ---  |
-Lite6 | [Link](lite6_description/README.md)|
+Lite6 | [Link](lite6_description/)|
+H1    | [Link](h1_description/)|
