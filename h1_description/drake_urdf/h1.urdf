@@ -33,35 +33,6 @@ Stephen Brawner (brawner@gmail.com)
     </collision>
   </link>
 
-  <link name="left_hip_yaw_link">
-    <inertial>
-      <origin xyz="-0.04923 0.0001 0.0072" rpy="0 0 0" />
-      <mass value="2.244" />
-      <inertia ixx="0.0025731" ixy="9.159E-06" ixz="-0.00051948" iyy="0.0030444" iyz="1.949E-06" izz="0.0022883" />
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh filename="package://h1_description/meshes/left_hip_yaw_link.dae" />
-      </geometry>
-      <material name="black"/>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0.13" rpy="0 0 0" />
-      <geometry>
-        <cylinder radius="0.05" length="0.08"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <joint name="left_hip_yaw_joint" type="revolute">
-    <origin xyz="0 0.0875 -0.1742" rpy="0 0 0" />
-    <parent link="pelvis" />
-    <child link="left_hip_yaw_link" />
-    <axis xyz="0 0 1" />
-    <limit lower="-0.43" upper="0.43" effort="200" velocity="23" />
-  </joint>
-
   <link name="left_hip_roll_link">
     <inertial>
       <origin xyz="-0.0058 -0.00319 -9E-05" rpy="0 0 0" />
@@ -126,6 +97,35 @@ Stephen Brawner (brawner@gmail.com)
     <limit lower="-3.14" upper="2.53" effort="200" velocity="23" />
   </joint>
 
+  <link name="left_hip_yaw_link">
+    <inertial>
+      <origin xyz="-0.04923 0.0001 0.0072" rpy="0 0 0" />
+      <mass value="2.244" />
+      <inertia ixx="0.0025731" ixy="9.159E-06" ixz="-0.00051948" iyy="0.0030444" iyz="1.949E-06" izz="0.0022883" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://h1_description/meshes/left_hip_yaw_link.dae" />
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.13" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.05" length="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="left_hip_yaw_joint" type="revolute">
+    <origin xyz="0 0.0875 -0.1742" rpy="0 0 0" />
+    <parent link="pelvis" />
+    <child link="left_hip_yaw_link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.43" upper="0.43" effort="200" velocity="23" />
+  </joint>
+
   <link name="left_knee_link">
     <inertial>
       <origin xyz="-0.00136 -0.00512 -0.1384" rpy="0 0 0" />
@@ -173,6 +173,12 @@ Stephen Brawner (brawner@gmail.com)
       <geometry>
         <box size="0.30 0.03 0.024"/>
       </geometry>
+      <drake:proximity_properties>
+        <drake:compliant_hydroelastic/>
+        <drake:hydroelastic_modulus value="1e7"/>
+        <drake:hunt_crossley_dissipation value="0."/>
+        <drake:mu_dynamic value="0.8"/>
+      </drake:proximity_properties>
     </collision>
   </link>
 
@@ -182,35 +188,6 @@ Stephen Brawner (brawner@gmail.com)
     <child link="left_ankle_link" />
     <axis xyz="0 1 0" />
     <limit lower="-0.87" upper="0.52" effort="40" velocity="9" />
-  </joint>
-
-  <link name="right_hip_yaw_link">
-    <inertial>
-      <origin xyz="-0.04923 -0.0001 0.0072" rpy="0 0 0" />
-      <mass value="2.244" />
-      <inertia ixx="0.0025731" ixy="-9.159E-06" ixz="-0.00051948" iyy="0.0030444" iyz="-1.949E-06" izz="0.0022883" />
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh filename="package://h1_description/meshes/right_hip_yaw_link.dae" />
-      </geometry>
-      <material name="black"/>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0.13" rpy="0 0 0" />
-      <geometry>
-        <cylinder radius="0.05" length="0.08"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <joint name="right_hip_yaw_joint" type="revolute">
-    <origin xyz="0 -0.0875 -0.1742" rpy="0 0 0" />
-    <parent link="pelvis" />
-    <child link="right_hip_yaw_link" />
-    <axis xyz="0 0 1" />
-    <limit lower="-0.43" upper="0.43" effort="200" velocity="23" />
   </joint>
 
   <link name="right_hip_roll_link">
@@ -277,6 +254,35 @@ Stephen Brawner (brawner@gmail.com)
     <limit lower="-3.14" upper="2.53" effort="200" velocity="23" />
   </joint>
 
+  <link name="right_hip_yaw_link">
+    <inertial>
+      <origin xyz="-0.04923 -0.0001 0.0072" rpy="0 0 0" />
+      <mass value="2.244" />
+      <inertia ixx="0.0025731" ixy="-9.159E-06" ixz="-0.00051948" iyy="0.0030444" iyz="-1.949E-06" izz="0.0022883" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://h1_description/meshes/right_hip_yaw_link.dae" />
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.13" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.05" length="0.08"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="right_hip_yaw_joint" type="revolute">
+    <origin xyz="0 -0.0875 -0.1742" rpy="0 0 0" />
+    <parent link="pelvis" />
+    <child link="right_hip_yaw_link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.43" upper="0.43" effort="200" velocity="23" />
+  </joint>
+
   <link name="right_knee_link">
     <inertial>
       <origin xyz="-0.00136 0.00512 -0.1384" rpy="0 0 0" />
@@ -324,6 +330,12 @@ Stephen Brawner (brawner@gmail.com)
       <geometry>
         <box size="0.30 0.03 0.024"/>
       </geometry>
+      <drake:proximity_properties>
+        <drake:compliant_hydroelastic/>
+        <drake:hydroelastic_modulus value="1e7"/>
+        <drake:hunt_crossley_dissipation value="0."/>
+        <drake:mu_dynamic value="0.8"/>
+      </drake:proximity_properties>
     </collision>
   </link>
 
@@ -640,5 +652,201 @@ Stephen Brawner (brawner@gmail.com)
     <child link="logo_link" />
     <axis xyz="0 0 0" />
   </joint>
+
+  <!-- Actuators -->
+  <!-- Left leg -->
+  <transmission name="tran1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_hip_roll_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor1">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_hip_pitch_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor2">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_hip_yaw_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor3">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran4">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_knee_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor4">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran5">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_ankle_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor5">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <!-- Right leg -->
+  <transmission name="tran6">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_hip_roll_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor6">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran7">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_hip_pitch_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor7">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran8">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_hip_yaw_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor8">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran9">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_knee_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor9">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran10">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_ankle_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor10">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <!-- Torso -->
+  <transmission name="tran11">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="torso_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor11">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <!-- Left arm -->
+  <transmission name="tran12">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_shoulder_roll_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor12">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran13">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_shoulder_pitch_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor13">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran14">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_shoulder_yaw_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor14">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran15">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_elbow_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor15">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <!-- Right arm -->
+  <transmission name="tran16">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_shoulder_roll_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor16">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran17">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_shoulder_pitch_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor17">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran18">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_shoulder_yaw_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor18">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran19">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_elbow_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor19">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
 
 </robot>

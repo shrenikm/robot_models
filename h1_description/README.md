@@ -1,58 +1,25 @@
-# Unitree H1 Description (URDF & MJCF)
+# H1 Description
 
 ## Overview
 
-This package includes a streamlined robot description (URDF & MJCF) for the [H1 Humanoid
-Robot](https://www.unitree.com/h1), developed by [Unitree Robotics](https://www.unitree.com/).
+This directory contains URDF descriptions of Unitree's H1 humanoid robot. The original description files can be found [here](https://github.com/unitreerobotics/unitree_ros/tree/master/robots/h1_description).
 
-The file `urdf/h1.urdf` is description for H1 without hands, and `urdf/h1_with_hand.urdf` for H1 with dexterous hands. For IsaacGym users, please the file with `_isaacgym.urdf` to avoid some visualization issues.
+Note that I've not included the version of the humanoid with dextrous hands.
 
-<p align="center">
-  <img src="doc/H1.png" width="500"/>
-</p>
+The models under `urdf/` can be used in a regular ROS setting (Although it's not something I've really tested).
 
-Basic H1 Humanoid have 19 joints:
+The models under `drake_urdf/` are the versions of the model that I modified for use with Drake. These ones have Drake specific extension tags added to them.
 
-```text
-root [⚓] => /pelvis/
-    left_hip_yaw_joint [⚙+Z] => /left_hip_yaw_link/
-        left_hip_roll_joint [⚙+X] => /left_hip_roll_link/
-            left_hip_pitch_joint [⚙+Y] => /left_hip_pitch_link/
-                left_knee_joint [⚙+Y] => /left_knee_link/
-                    left_ankle_joint [⚙+Y] => /left_ankle_link/
-    right_hip_yaw_joint [⚙+Z] => /right_hip_yaw_link/
-        right_hip_roll_joint [⚙+X] => /right_hip_roll_link/
-            right_hip_pitch_joint [⚙+Y] => /right_hip_pitch_link/
-                right_knee_joint [⚙+Y] => /right_knee_link/
-                    right_ankle_joint [⚙+Y] => /right_ankle_link/
-    torso_joint [⚙+Z] => /torso_link/
-        left_shoulder_pitch_joint [⚙+Y] => /left_shoulder_pitch_link/
-            left_shoulder_roll_joint [⚙+X] => /left_shoulder_roll_link/
-                left_shoulder_yaw_joint [⚙+Z] => /left_shoulder_yaw_link/
-                    left_elbow_joint [⚙+Y] => /left_elbow_link/
-        right_shoulder_pitch_joint [⚙+Y] => /right_shoulder_pitch_link/
-            right_shoulder_roll_joint [⚙+X] => /right_shoulder_roll_link/
-                right_shoulder_yaw_joint [⚙+Z] => /right_shoulder_yaw_link/
-                    right_elbow_joint [⚙+Y] => /right_elbow_link/
-```
+## Additional modifications
 
-## Usages
+I've left the visual meshes untouched but I've updated the collision meshes to use simple convex geometries (boxes, cylinders and spheres) as their original geometries were incorrect.
 
-### [MuJoCo](https://github.com/google-deepmind/mujoco)(recommend)
+## Visuals
 
-```bash
-pip install mujoco
-python -m mujoco.viewer --mjcf=mjcf/scene.xml
-```
+### Visual model
 
-### RViz
+### Collision geometry
 
-```bash
-roslaunch h1_description display.launch
-```
+### Inertia representations
 
-### Gazebo
 
-```bash
-roslaunch h1_description gazebo.launch
-```
