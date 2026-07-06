@@ -10,3 +10,4 @@ Robot | Link |
 ---   | ---  |
 Lite6 | [Link](lite6_description/)|
 H1    | [Link](h1_description/)|
+reBot B601 DM | [Link](rebot_b601_dm_description/)|
