@@ -22,9 +22,9 @@ of tight convex primitives fitted to each link. See the package README for detai
 
   <link name="base_link">
     <inertial>
-      <origin rpy="0 0 0" xyz="-2.70523135620574E-06 -7.70134319499296E-06 0.028980835090929"/>
-      <mass value="0.79874480798149"/>
-      <inertia ixx="0.00167922927706365" ixy="1.88775164237686E-09" ixz="-1.97136369561029E-08" iyy="0.00100413042930826" iyz="2.1823444305057E-07" izz="0.00243992061460991"/>
+      <origin rpy="0 0 0" xyz="-7.849E-06 -1.1531E-06 0.029841"/>
+      <mass value="0.83660000"/>
+      <inertia ixx="0.00133040" ixy="0.00000001" ixz="0.00000000" iyy="0.00213119" iyz="0.00000000" izz="0.00275877"/>
     </inertial>
     <visual>
       <geometry>
@@ -53,9 +53,9 @@ of tight convex primitives fitted to each link. See the package README for detai
 
   <link name="link1">
     <inertial>
-      <origin rpy="0 0 0" xyz="1.20584908205569E-05 -0.00052246270024925 0.0197721792915801"/>
-      <mass value="0.0840736498625263"/>
-      <inertia ixx="8.53930680558479E-05" ixy="5.36083090564592E-11" ixz="8.1878892265138E-06" iyy="5.08885968641724E-05" iyz="1.61532065580032E-10" izz="8.03867731313707E-05"/>
+      <origin rpy="0 0 0" xyz="0.000113614552951627 -0.000616319527051323 0.0236476372671394"/>
+      <mass value="0.16130000"/>
+      <inertia ixx="0.00025207" ixy="0.00000000" ixz="-0.00002832" iyy="0.00015464" iyz="0.00000000" izz="0.00023416"/>
     </inertial>
     <visual>
       <geometry>
@@ -109,9 +109,9 @@ of tight convex primitives fitted to each link. See the package README for detai
 
   <link name="link2">
     <inertial>
-      <origin rpy="0 0 0" xyz="-0.13224463371047 -0.00305031595315752 -0.0309299400248282"/>
-      <mass value="0.710394385134637"/>
-      <inertia ixx="0.00025002655459552" ixy="1.60716279794484E-06" ixz="2.51351488848234E-09" iyy="0.00186321981627926" iyz="4.36542160316282E-07" izz="0.00186007710433815"/>
+      <origin rpy="0 0 0" xyz="-0.13225622308888 -0.0030617036386309 -0.0308306967030205"/>
+      <mass value="1.32660000"/>
+      <inertia ixx="0.00073374" ixy="-0.00000043" ixz="0.00000851" iyy="0.01255987" iyz="0.00000128" izz="0.01281387"/>
     </inertial>
     <visual>
       <geometry>
@@ -157,9 +157,9 @@ of tight convex primitives fitted to each link. See the package README for detai
 
   <link name="link3">
     <inertial>
-      <origin rpy="0 0 0" xyz="0.121507513231219 -0.0537568110789665 -0.0310861781010256"/>
-      <mass value="0.524941641478664"/>
-      <inertia ixx="0.000160157099221732" ixy="-1.6160403467948E-05" ixz="-3.33082723997513E-06" iyy="0.00124905589930288" iyz="2.96940939137566E-07" izz="0.00125568117526574"/>
+      <origin rpy="0 0 0" xyz="0.121040035791843 -0.0536211076627949 -0.0310137854608077"/>
+      <mass value="0.83530000"/>
+      <inertia ixx="0.00046807" ixy="-0.00003456" ixz="-0.00004260" iyy="0.00632695" iyz="0.00000006" izz="0.00648221"/>
     </inertial>
     <visual>
       <geometry>
@@ -213,9 +213,9 @@ of tight convex primitives fitted to each link. See the package README for detai
 
   <link name="link4">
     <inertial>
-      <origin rpy="0 0 0" xyz="0.0612381846323297 -0.0515229512574568 -0.0303340352965348"/>
-      <mass value="0.191139210973019"/>
-      <inertia ixx="7.18184289370392E-05" ixy="-1.12301944951731E-05" ixz="-5.19641435494074E-08" iyy="0.000112900067589117" iyz="2.21782677668291E-07" izz="0.000101141504876404"/>
+      <origin rpy="0 0 0" xyz="0.0608200956293136 -0.0511711906613122 -0.030299458623927"/>
+      <mass value="0.52000000"/>
+      <inertia ixx="0.00045986" ixy="0.00024219" ixz="-0.00000672" iyy="0.00075258" iyz="-0.00000535" izz="0.00066742"/>
     </inertial>
     <visual>
       <geometry>
@@ -261,9 +261,9 @@ of tight convex primitives fitted to each link. See the package README for detai
 
   <link name="link5">
     <inertial>
-      <origin rpy="0 0 0" xyz="-0.00504933072901427 1.74603011302099E-06 0.0387866303374511"/>
-      <mass value="0.150004102113546"/>
-      <inertia ixx="6.79196566487009E-05" ixy="-7.20237013118825E-10" ixz="-2.82554291275232E-06" iyy="5.17186991502111E-05" iyz="9.87947763397051E-09" izz="5.43656904496111E-05"/>
+      <origin rpy="0 0 0" xyz="-0.00502802058982517 1.73866206692364E-06 0.0386233236326755"/>
+      <mass value="0.38300000"/>
+      <inertia ixx="0.00019772" ixy="-0.00000062" ixz="-0.00002426" iyy="0.00021737" iyz="0.00000002" izz="0.00017191"/>
     </inertial>
     <visual>
       <geometry>
@@ -325,9 +325,9 @@ of tight convex primitives fitted to each link. See the package README for detai
 
   <link name="link6">
     <inertial>
-      <origin rpy="0 0 0" xyz="-1.76034430143801E-05 7.61449749622373E-09 0.00431722560895041"/>
-      <mass value="0.0187271664583674"/>
-      <inertia ixx="4.42801172036323E-06" ixy="1.26927907319828E-13" ixz="-1.52049684129749E-10" iyy="4.37712746743999E-06" iyz="-2.5907655197107E-13" izz="8.55249688102954E-06"/>
+      <origin rpy="0 0 0" xyz="3.76418727127126E-06 -0.000100908819946677 0.0253308606425965"/>
+      <mass value="0.36630000"/>
+      <inertia ixx="0.00015554" ixy="-0.00000" ixz="-0.00000" iyy="0.00015554" iyz="-0.0000" izz="0.00013966"/>
     </inertial>
     <visual>
       <geometry>
@@ -358,8 +358,8 @@ of tight convex primitives fitted to each link. See the package README for detai
   <link name="gripper_link">
     <inertial>
       <origin rpy="0 0 0" xyz="-0.11400456131826 7.30809328589541E-05 -8.098254686284E-08"/>
-      <mass value="0.181800159145243"/>
-      <inertia ixx="0.000232385828322385" ixy="-2.77584025941111E-07" ixz="-6.04874349510246E-10" iyy="5.85085867377427E-05" iyz="-1.15493362444215E-08" izz="0.000205213535851537"/>
+      <mass value="0.36534420980225685"/>
+      <inertia ixx="0.000467000783810404" ixy="-5.578307361665363e-07" ixz="-1.2155508679996518e-09" iyy="0.0001175784085605226" iyz="-2.3209457812342875e-08" izz="0.00041239555261615214"/>
     </inertial>
     <visual>
       <geometry>
